@@ -1,1 +1,18 @@
-"managed_components/" 
+# ESP-IDF 构建产物
+build/
+sdkconfig.old
+
+# 组件管理器自动拉取的依赖，不入库
+managed_components/
+
+# IDE / 编辑器
+.vscode/
+.idea/
+
+# Python 缓存
+__pycache__/
+*.pyc
+
+# 系统文件
+.DS_Store
+Thumbs.db
