@@ -1,0 +1,52 @@
+# Target: ESP32-S3 (R8, 8MB PSRAM, 16MB flash)
+CONFIG_IDF_TARGET="esp32s3"
+
+# --- Flash: W25Q128 16MB ---
+CONFIG_ESPTOOLPY_FLASHSIZE_16MB=y
+CONFIG_ESPTOOLPY_FLASHSIZE="16MB"
+
+# --- Custom partition table (factory 4M 容纳全量 GB2312 字体) ---
+CONFIG_PARTITION_TABLE_CUSTOM=y
+CONFIG_PARTITION_TABLE_CUSTOM_FILENAME="partitions.csv"
+
+# --- PSRAM: 8MB Octal ---
+CONFIG_SPIRAM=y
+CONFIG_SPIRAM_MODE_OCT=y
+CONFIG_SPIRAM_SPEED_80M=y
+CONFIG_SPIRAM_USE_MALLOC=y
+CONFIG_SPIRAM_MALLOC_ALWAYSINTERNAL=16384
+CONFIG_SPIRAM_TRY_ALLOCATE_WIFI_LWIP=y
+
+# --- CPU 240MHz ---
+CONFIG_ESP_DEFAULT_CPU_FREQ_MHZ_240=y
+CONFIG_ESP_DEFAULT_CPU_FREQ_MHZ=240
+
+# --- FreeRTOS: 1kHz tick for smooth animations ---
+CONFIG_FREERTOS_HZ=1000
+
+# --- WiFi ---
+CONFIG_ESP_WIFI_ENABLED=y
+
+# --- TLS: 腾讯 K线兜底走 https, net.c 用 esp_crt_bundle_attach, 需要根证书 bundle ---
+CONFIG_ESP_HTTP_CLIENT_ENABLE_HTTPS=y
+CONFIG_MBEDTLS_CERTIFICATE_BUNDLE=y
+
+# --- Console/uart ---
+CONFIG_ESP_CONSOLE_UART_DEFAULT=y
+
+# --- LVGL: 用自带的 app_font_cn_16(全量 GB2312), 关闭内置 CJK 以省 flash ---
+#     14 = 默认字体(个股页 K线状态文字用), 20 = 中号数字, 28 = 大号数字
+CONFIG_LV_FONT_MONTSERRAT_14=y
+CONFIG_LV_FONT_MONTSERRAT_20=y
+CONFIG_LV_FONT_MONTSERRAT_28=y
+CONFIG_LV_COLOR_DEPTH_16=y
+# 注: LVGL 8 时代的 CONFIG_LV_MEM_CUSTOM / CONFIG_LV_MEM_CUSTOM_INCLUDE 在 LVGL 9 里
+#     已不存在(写了也会被忽略), 故删除。LVGL 9.6 对应项是 LV_USE_STDLIB_MALLOC:
+#     0(默认) = 使用 LVGL 内置内存池, 大小由 CONFIG_LV_MEM_SIZE 决定(当前 65536);
+#     1 = 使用 clib malloc()。想让 LVGL 内存走 PSRAM 时应改这一项。
+
+# --- FATFS: SD card uses 512-byte sectors ---
+CONFIG_FATFS_SECTOR_512=y
+
+# --- Bigger stack for main task (LVGL + app init) ---
+CONFIG_ESP_MAIN_TASK_STACK_SIZE=8192
