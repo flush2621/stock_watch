@@ -61,8 +61,8 @@
 #define SD_SPI_HZ           (40 * 1000 * 1000)
 
 /* ---------------- WiFi credentials ---------------- */
-#define WIFI_SSID           "HT"
-#define WIFI_PASS           "kyjk123456"
+#define WIFI_SSID           "XX"
+#define WIFI_PASS           "xxxxxxxx"
 
 /* ---------------- 股票行情 ---------------- */
 /* SD 卡里的股票代码文件: /sdcard/stock/code.txt (一行一个代码) */
