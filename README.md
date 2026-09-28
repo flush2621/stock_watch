@@ -83,8 +83,8 @@ idf.py reconfigure
 修改 `main/app_config.h`：
 
 ```c
-#define WIFI_SSID  "HT"
-#define WIFI_PASS  "kyjk123456"
+#define WIFI_SSID  "XX"
+#define WIFI_PASS  "xxxxxxxx"
 ```
 
 ## 目录结构
